@@ -1,17 +1,22 @@
-import { useState } from 'react'
-import todasAsPerguntas from '@/data/constants/perguntas'
+import { useState, useEffect } from 'react'
+import { obterPerguntas } from '@/data/services/perguntasService'
 
 export default function useQuestionario() {
     const [indicePergunta, setIndicePergunta] = useState(0)
     const [respostas, setRespostas] = useState<number[]>([])
-    const [perguntas, setPerguntas] = useState(sortearPerguntas())
+    const [perguntas, setPerguntas] = useState([]) // Inicializado como array vazio
 
-    function sortearPerguntas() {
-        const perguntasEmbaralhadas = [...todasAsPerguntas]
-            .sort(() => Math.random() - 0.5)
-            .slice(0, 3)
-        return perguntasEmbaralhadas
-    }
+    useEffect(() => {
+        const carregarPerguntas = async () => {
+            try {
+                const perguntasDoJSON = await obterPerguntas()
+                setPerguntas(perguntasDoJSON)
+            } catch (error) {
+                console.error('Erro ao carregar perguntas:', error)
+            }
+        }
+        carregarPerguntas()
+    }, [])
 
     return {
         get pergunta() {
@@ -29,9 +34,6 @@ export default function useQuestionario() {
         get concluido() {
             return indicePergunta === perguntas.length
         },
-        get indiceAtual() {
-            return indicePergunta 
-        },
         responder(resposta: number) {
             setRespostas([...respostas, resposta])
             setIndicePergunta(indicePergunta + 1)
@@ -39,7 +41,6 @@ export default function useQuestionario() {
         reiniciar() {
             setIndicePergunta(0)
             setRespostas([])
-            setPerguntas(sortearPerguntas())
         },
     }
 }
