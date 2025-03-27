@@ -58,8 +58,8 @@ export default function Index() {
               avançarParaProximaPergunta={avançarParaProximaPergunta}
             />
             {respostaSelecionada !== null && !mostrarRespostaCorreta && (
-              <TouchableOpacity  style={{ backgroundColor: "#FFFFFF", marginTop: 20, alignItems: 'center', width: '50%',}} onPress={mostrarRespostaCorretaFuncao}>
-              <Text style={{ fontSize: 18, marginTop:20, height: 50, fontWeight: 'bold', color: '#FFFFFF',  backgroundColor: '#FFFFFF', color:'#00000' }}>Confirmar</Text>
+              <TouchableOpacity  style={{ backgroundColor: "#FFFFFF", height: 50, marginTop: 20, alignItems: 'center', justifyContent: 'center', alignSelf: 'center', width: 100, borderRadius: 10}} onPress={mostrarRespostaCorretaFuncao}>
+              <Text style={{ fontSize: 18, fontWeight: 'bold',  color:'#00000' }}>Confirmar</Text>
             </TouchableOpacity>
             )}
           </View>

@@ -33,10 +33,30 @@ export default function Pergunta(props: PerguntaProps) {
         ))}
       </View >
       {props.mostrarRespostaCorreta && (
-        <TouchableOpacity style={{ backgroundColor: "#FFFFFF", marginTop: 20, alignItems: 'center', width: '50%',}} onPress={props.avançarParaProximaPergunta}>
-  <Text style={{ fontSize: 18, marginTop:20, height: 50, fontWeight: 'bold', color: '#FFFFFF',  backgroundColor: '#FFFFFF', color:'#00000' }}>Avançar</Text>
-</TouchableOpacity>
-      )}
+  <TouchableOpacity
+    style={{
+      backgroundColor: "#FFFFFF",
+      marginTop: 20,
+      alignItems: "center",
+      justifyContent: "center", 
+      alignSelf: "center", 
+      width: 100, 
+      height: 50, 
+      borderRadius: 10, 
+    }}
+    onPress={props.avançarParaProximaPergunta}
+  >
+    <Text
+      style={{
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#000000", 
+      }}
+    >
+      Avançar
+    </Text>
+  </TouchableOpacity>
+)}
     </View>
   )
 }

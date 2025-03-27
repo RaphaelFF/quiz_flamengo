@@ -6,21 +6,34 @@ export default function useQuestionario() {
     const [respostas, setRespostas] = useState<number[]>([])
     const [perguntas, setPerguntas] = useState([]) // Inicializado como array vazio
 
-    useEffect(() => {
-        const carregarPerguntas = async () => {
-            try {
-                const perguntasDoJSON = await obterPerguntas()
-                setPerguntas(perguntasDoJSON)
-            } catch (error) {
-                console.error('Erro ao carregar perguntas:', error)
-            }
+    // Defina o número de perguntas por rodada
+    const NUMERO_DE_PERGUNTAS = 2
+
+    // Função para embaralhar e selecionar perguntas
+    const embaralharPerguntas = async () => {
+        try {
+            const perguntasDoJSON = await obterPerguntas()
+            console.log('Perguntas carregadas do JSON:', perguntasDoJSON) // Debug: Exibe as perguntas carregadas
+
+            // Embaralha as perguntas e seleciona apenas a quantidade definida
+            const perguntasAleatorias = perguntasDoJSON
+                .sort(() => Math.random() - 0.5) // Embaralha as perguntas
+                .slice(0, NUMERO_DE_PERGUNTAS) // Seleciona as primeiras N perguntas
+            console.log('Perguntas selecionadas aleatoriamente:', perguntasAleatorias) // Debug: Exibe as perguntas selecionadas
+            setPerguntas(perguntasAleatorias)
+        } catch (error) {
+            console.error('Erro ao carregar perguntas:', error)
         }
-        carregarPerguntas()
+    }
+
+    // Carrega as perguntas na inicialização
+    useEffect(() => {
+        embaralharPerguntas()
     }, [])
 
     return {
         get pergunta() {
-            return perguntas[indicePergunta]
+            return perguntas[indicePergunta] || null // Retorna null se não houver pergunta
         },
         get pontuacao() {
             return perguntas
@@ -29,10 +42,13 @@ export default function useQuestionario() {
                 .filter(Boolean).length
         },
         get totalDePerguntas() {
-            return perguntas.length
+            return perguntas.length || 0 // Garante que seja 0 se perguntas estiver vazio
         },
         get concluido() {
-            return indicePergunta === perguntas.length
+            return indicePergunta >= perguntas.length
+        },
+        get indiceAtual() {
+            return indicePergunta // Retorna o índice atual
         },
         responder(resposta: number) {
             setRespostas([...respostas, resposta])
@@ -41,6 +57,7 @@ export default function useQuestionario() {
         reiniciar() {
             setIndicePergunta(0)
             setRespostas([])
+            embaralharPerguntas() // Recarrega perguntas aleatórias ao reiniciar
         },
     }
 }
