@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 
 export default function Logo() {
     return (
-        <View>
+        <SafeAreaView>
             <Text style={styles.primario}>FLAMENGO</Text>
             <Text style={styles.segundario}>O melhor time do Mundo!</Text>
-        </View>
+        </SafeAreaView>
     )
 }
 

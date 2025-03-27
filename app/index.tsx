@@ -1,4 +1,5 @@
-import { View } from 'react-native'
+import React, { useState } from 'react';
+import { SafeAreaView, Text, View, TouchableOpacity,  } from 'react-native'
 import Logo from '@/components/template/Logo'
 import Pagina from '@/components/template/Pagina'
 import Pergunta from '@/components/questionario/Pergunta'
@@ -6,30 +7,64 @@ import useQuestionario from '@/data/hooks/useQuestionario'
 import Resultado from '@/components/questionario/Resultado'
 
 export default function Index() {
-    const { pergunta, concluido, pontuacao, totalDePerguntas, responder, reiniciar, indiceAtual } =
-        useQuestionario()
+  const { pergunta, concluido, pontuacao, totalDePerguntas, responder, reiniciar, indiceAtual } =
+    useQuestionario()
 
-    // Calcula o progresso com base no índice atual
-    const progresso = `${indiceAtual + 1}/${totalDePerguntas}`
+  // Calcula o progresso com base no índice atual
+  const progresso = `${indiceAtual + 1}/${totalDePerguntas}`
 
-    return (
-        <Pagina>
-            <View style={{ gap: 40 }}>
-                <Logo />
-                {concluido ? (
-                    <Resultado
-                        pontuacao={pontuacao}
-                        totalDePerguntas={totalDePerguntas}
-                        reiniciar={reiniciar}
-                    />
-                ) : (
-                    <Pergunta
-                        pergunta={pergunta}
-                        opcaoSelecionada={responder}
-                        progresso={progresso} // Passa o progresso
-                    />
-                )}
-            </View>
-        </Pagina>
-    )
+  // Estado para armazenar a resposta do usuário
+  const [respostaSelecionada, setRespostaSelecionada] = useState(null)
+  const [mostrarRespostaCorreta, setMostrarRespostaCorreta] = useState(false)
+
+  // Função para atualizar a resposta do usuário
+  const atualizarResposta = (resposta) => {
+    setRespostaSelecionada(resposta)
+  }
+
+  // Função para avançar para a próxima pergunta
+  const avançarParaProximaPergunta = () => {
+    if (respostaSelecionada !== null) {
+      responder(respostaSelecionada)
+      setRespostaSelecionada(null)
+      setMostrarRespostaCorreta(false)
+    }
+  }
+
+  // Função para mostrar a resposta correta
+  const mostrarRespostaCorretaFuncao = () => {
+    setMostrarRespostaCorreta(true)
+  }
+
+  return (
+    <Pagina>
+      <SafeAreaView style={{ gap: 40 }}>
+        <Logo />
+        {concluido ? (
+          <Resultado
+            pontuacao={pontuacao}
+            totalDePerguntas={totalDePerguntas}
+            reiniciar={reiniciar}
+          />
+        ) : (
+          <View style={{ justifyContent: 'center', alignContent:'center', alignItems: 'center',}}>
+            <Pergunta
+              pergunta={pergunta}
+              opcaoSelecionada={atualizarResposta}
+              progresso={progresso}
+              respostaSelecionada={respostaSelecionada}
+              respostaCorreta={pergunta.resposta}
+              mostrarRespostaCorreta={mostrarRespostaCorreta}
+              avançarParaProximaPergunta={avançarParaProximaPergunta}
+            />
+            {respostaSelecionada !== null && !mostrarRespostaCorreta && (
+              <TouchableOpacity  style={{ backgroundColor: "#FFFFFF", marginTop: 20, alignItems: 'center', width: '50%',}} onPress={mostrarRespostaCorretaFuncao}>
+              <Text style={{ fontSize: 18, marginTop:20, height: 50, fontWeight: 'bold', color: '#FFFFFF',  backgroundColor: '#FFFFFF', color:'#00000' }}>Confirmar</Text>
+            </TouchableOpacity>
+            )}
+          </View>
+        )}
+      </SafeAreaView>
+    </Pagina>
+  )
 }
