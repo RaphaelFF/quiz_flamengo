@@ -7,7 +7,7 @@ import PerguntaModel from '@/data/model/Pergunta'
 export interface PerguntaProps {
   pergunta: PerguntaModel
   opcaoSelecionada: (indice: number) => void
-  progresso: string // Adiciona a propriedade de progresso (ex.: "1/10")
+  progresso: string 
   respostaSelecionada: number | null
   respostaCorreta: number | null
   mostrarRespostaCorreta: boolean
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   enunciado: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#FFFFFF', // Texto branco
+    color: '#FFFFFF', 
     opacity: 0.5,
   },
 })

@@ -46,16 +46,16 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   containerPressed: {
-    backgroundColor: 'rgba(166, 13, 37, 0.8)', // Fundo mais opaco ao pressionar
+    backgroundColor: 'rgba(166, 13, 37, 0.8)', 
   },
   containerSelecionada: {
-    backgroundColor: 'rgba(166, 13, 37, 0.8)', // Fundo verde ao selecionar
+    backgroundColor: 'rgba(166, 13, 37, 0.8)', 
   },
   containerCorreta: {
-    backgroundColor: 'rgba(0, 255, 0, 0.5)', // Fundo azul para a resposta correta
+    backgroundColor: 'rgba(0, 255, 0, 0.5)', 
   },
   textContainer: {
-    // Nenhuma transparência aplicada aqui
+    
   },
   texto: {
     fontSize: 23,
