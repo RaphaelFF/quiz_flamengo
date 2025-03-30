@@ -6,7 +6,7 @@ export default function useQuestionario() {
     const [respostas, setRespostas] = useState<number[]>([])
     const [perguntas, setPerguntas] = useState([]) 
     
-    const NUMERO_DE_PERGUNTAS = 2
+    const NUMERO_DE_PERGUNTAS = 10
 
     
     const embaralharPerguntas = async () => {

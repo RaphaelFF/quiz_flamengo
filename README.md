@@ -8,3 +8,7 @@
 
     npx expo start
  
+
+3 buid
+
+eas build --platform android

@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "app-mobile",
-    "slug": "app-mobile",
-    "version": "2.0.0",
+    "name": "Quiz do Mengão",
+    "slug": "quiz-do-mengao",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/splash-icon-light.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/icon.png",
+      "image": "./assets/images/splash-icon-light.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,10 +17,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/splash-icon-light.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.raphael4026.appmobile"
+      "package": "com.raphael4026.quizdomengao"
     },
     "web": {
       "bundler": "metro",
@@ -39,8 +39,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "ff8f9833-5479-4aba-bc9d-f1d19ab85d82"
+        "projectId": "8bd5bab0-21a7-4bcf-b782-b1f37d5284f4"
       }
-    }
+    },
+    "owner": "raphael4026"
   }
 }
