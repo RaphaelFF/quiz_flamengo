@@ -48,15 +48,17 @@ Certifique-se de ter instalado:
 ### 2. Clone o repositório
 ```bash
 git clone https://github.com/seu-usuario/quiz_flamengo.git
-cd quiz_flamengo 
-
 ```
 
 ### 3. Instale as Dependências
+```bash
 npm install
+```
 
 ### 4. Inicie o servidor de desenvolvimento
+```bash
 npx expo start
+```
 
 ### 5. Teste no dispositivo ou emulador
 Escaneie o QR Code no terminal com o aplicativo Expo Go (disponível na Play Store ou App Store).
@@ -66,6 +68,6 @@ OBS:
 
 🗂️ Banco de Dados
 O projeto utiliza o Supabase para gerenciar as perguntas do quiz. Certifique-se de configurar as variáveis de ambiente no arquivo **perguntasService.ts**
-**const supabaseUrl** = 'https://sua-url.supabase.co';
-**const supabaseKey** = 'sua-chave-publica';
+- **const supabaseUrl** = 'https://sua-url.supabase.co';
+- **const supabaseKey** = 'sua-chave-publica';
 
