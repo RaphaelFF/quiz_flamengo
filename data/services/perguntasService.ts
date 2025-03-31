@@ -1,9 +1,11 @@
 import { createClient } from '@supabase/supabase-js';
+import { SUPABASE_URL, SUPABASE_KEY } from '@env';
 
+if (!SUPABASE_URL || !SUPABASE_KEY) {
+    throw new Error('As variáveis SUPABASE_URL e SUPABASE_KEY não estão definidas.');
+}
 
-const supabaseUrl = 'https://blxwoqiaarfjnxodbftr.supabase.co'; 
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJseHdvcWlhYXJmam54b2RiZnRyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxOTQ5ODcsImV4cCI6MjA1ODc3MDk4N30.NEiyQZkVK7z1E8bjFTzDdSjwCQS2tP9FNfsWzJClypU'; // Substitua pela chave pública do Supabase
-const supabase = createClient(supabaseUrl, supabaseKey);
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 export const obterPerguntas = async () => {
     try {
